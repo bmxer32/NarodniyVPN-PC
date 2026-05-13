@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  /* Было 0.3s (300мс), ставим 0.15s (150мс) чтобы совпадало с React */
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+/* Глобальный переход для всех элементов */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  /* Было 300ms, ставим 150ms для мгновенной реакции */
+  transition-duration: 150ms;
+}

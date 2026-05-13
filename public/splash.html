@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загрузка...</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffffff;
+            color: #262626;
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            user-select: none;
+            cursor: wait;
+        }
+
+        .scene-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        /* === КОТИК === */
+        .cat {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            bottom: -5px; 
+            z-index: 1;
+            transform-origin: bottom center;
+            animation: strict-timing 4s ease-in-out infinite;
+        }
+
+        .cat-head { fill: #374151; }
+        .cat-ears { fill: #374151; }
+        .cat-eyes { fill: #ffffff; animation: blink 4s infinite; }
+        .cat-pupils { fill: #000000; animation: strict-eyes 4s infinite; }
+        .cat-nose { fill: #fca5a5; }
+
+        /* === СЕРВЕР === */
+        .server {
+            position: relative;
+            width: 90px;
+            height: 50px;
+            background: #0D4CD3;
+            border-radius: 6px;
+            z-index: 10;
+            box-shadow: 0 10px 20px -5px rgba(13, 76, 211, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 12px;
+            border-bottom: 4px solid #0a369d;
+        }
+
+        .server-lights { display: flex; gap: 5px; }
+        .light { width: 5px; height: 5px; border-radius: 50%; background: rgba(255, 255, 255, 0.4); }
+        .light.active { background: #4ade80; animation: blink-light 0.8s infinite alternate; }
+        .light.working { background: #facc15; animation: blink-light 2s infinite alternate-reverse; }
+        
+        .vents { display: flex; flex-direction: column; gap: 3px; }
+        .vent { width: 25px; height: 2px; background: rgba(0,0,0,0.15); border-radius: 2px; }
+
+        /* === АНИМАЦИИ === */
+        @keyframes strict-timing {
+            0%, 25% { transform: translateY(0); } 
+            35% { transform: translateY(-35px); } 
+            45% { transform: translateY(-35px) rotate(-5deg); } 
+            65% { transform: translateY(-35px) rotate(5deg); }  
+            75% { transform: translateY(-35px) rotate(0deg); }  
+            85% { transform: translateY(0); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes strict-eyes {
+            0%, 35% { transform: translateX(0); }
+            45% { transform: translateX(-4px); }
+            65% { transform: translateX(4px); }
+            75% { transform: translateX(0); }
+            100% { transform: translateX(0); }
+        }
+
+        @keyframes blink-light { 0% { opacity: 0.4; } 100% { opacity: 1; } }
+
+        h3 {
+            margin: 5px 0 0 0;
+            font-size: 18px;
+            font-weight: 700;
+            z-index: 20;
+            background: white;
+            padding: 0 10px;
+        }
+
+        p {
+            margin: 5px 0 0 0;
+            font-size: 12px;
+            color: #6b7280;
+            text-align: center;
+            font-weight: 500;
+            min-height: 20px; /* Чтобы текст не прыгал */
+        }
+
+        .progress-bar {
+            width: 140px;
+            height: 4px;
+            background: #f3f4f6;
+            border-radius: 10px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 30%;
+            background: #0D4CD3;
+            animation: loading 2s infinite ease-in-out;
+            border-radius: 10px;
+        }
+
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(250%); }
+        }
+    </style>
+</head>
+<body>
+    <div class="scene-container">
+        <svg class="cat" viewBox="0 0 100 100">
+            <path class="cat-ears" d="M15 35 L25 10 L45 35 L55 10 L65 35 Z" transform="translate(10, 0)"/>
+            <circle class="cat-head" cx="50" cy="55" r="32" />
+            <ellipse class="cat-eyes" cx="38" cy="48" rx="9" ry="11" />
+            <ellipse class="cat-eyes" cx="62" cy="48" rx="9" ry="11" />
+            <circle class="cat-pupils" cx="38" cy="48" r="4" />
+            <circle class="cat-pupils" cx="62" cy="48" r="4" />
+            <path class="cat-nose" d="M46 65 L54 65 L50 70 Z" />
+        </svg>
+
+        <div class="server">
+            <div class="server-lights">
+                <div class="light active"></div>
+                <div class="light working"></div>
+                <div class="light"></div>
+            </div>
+            <div class="vents">
+                <div class="vent"></div>
+                <div class="vent"></div>
+                <div class="vent"></div>
+            </div>
+        </div>
+    </div>
+
+    <h3>Narodniy VPN</h3>
+    <p id="splash-text">Загрузка...</p>
+
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+
+    <script>
+        try {
+            const params = new URLSearchParams(window.location.search);
+            const text = params.get('text');
+            if (text) {
+                document.getElementById('splash-text').innerText = text;
+            }
+        } catch (e) {
+            console.error('Error parsing splash text:', e);
+        }
+    </script>
+</body>
+</html>
