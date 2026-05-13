@@ -4,7 +4,7 @@
 
 **Windows-приложение для VPN с раздельной маршрутизацией трафика, построенное на Electron + React**
 
-[![Скачать](https://img.shields.io/badge/⬇️_Скачать-v1.2.6-brightgreen?style=for-the-badge)](https://github.com/bmxer32/NarodniyVPN-PC/releases/latest/download/Народный%20VPN%20Setup%201.2.6.exe)
+[![Скачать](https://img.shields.io/badge/⬇️_Скачать-v1.2.6-brightgreen?style=for-the-badge)](https://github.com/bmxer32/NarodniyVPN-PC/releases/tag/v1.2.6)
 
 ![Version](https://img.shields.io/badge/версия-1.2.6-blue)
 ![Platform](https://img.shields.io/badge/платформа-Windows-lightgrey)
