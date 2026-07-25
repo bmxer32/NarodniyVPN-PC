@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 
 // НЕ ЗАБУДЬТЕ ОБНОВИТЬ ВЕРСИЮ В package.json ТОЖЕ
-const CURRENT_VERSION = "1.2.7";
+const CURRENT_VERSION = "1.2.8";
 
 // --- ИКОНКИ ---
 const TikTokIcon = ({ className }: { className?: string }) => (
@@ -23,6 +23,13 @@ const GrokIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className} xmlns="http://www.w3.org/2000/svg">
     <path d="M4 20h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"/>
     <path d="m9 15 6-6"/>
+  </svg>
+);
+const AntigravityIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 3v13"/>
+    <path d="m7 8 5-5 5 5"/>
+    <path d="M5 20h14"/>
   </svg>
 );
 const ClaudeIcon = ({ className }: { className?: string }) => (
@@ -101,6 +108,7 @@ const AVAILABLE_APPS = [
   { id: 'spotify', name: 'Spotify', icon: <Music size={26} className="text-green-500" /> },
   { id: 'openai', name: 'ChatGPT', icon: <Bot size={26} className="text-emerald-500" /> },
   { id: 'gemini', name: 'Gemini', icon: <Sparkles size={26} className="text-blue-400" /> },
+  { id: 'antigravity', name: 'Antigravity', icon: <AntigravityIcon className="text-indigo-500" /> },
   { id: 'canva', name: 'Canva', icon: <Palette size={26} className="text-cyan-500" /> },
   { id: 'grok', name: 'Grok', icon: <GrokIcon className="text-gray-800 dark:text-gray-200" /> },
   { id: 'claude', name: 'Claude', icon: <ClaudeIcon className="text-amber-600" /> },
@@ -297,7 +305,7 @@ function App() {
 
   const [selectedApps, setSelectedApps] = useState<Record<string, boolean>>({
     discord: false, youtube: false, instagram: false, twitter: false, telegram: false,
-    openai: false, gemini: false, spotify: false, roblox: false,
+    openai: false, gemini: false, antigravity: false, spotify: false, roblox: false,
     tiktok: false, netflix: false, canva: false, linkedin: false, facebook: false, brawlstars: false,
     grok: false, claude: false, twitch: false, reddit: false, github: false, pinterest: false, steam: false,
     snapchat: false, figma: false, notion: false, medium: false, zoom: false, soundcloud: false
@@ -473,9 +481,11 @@ function App() {
     const storedApps = localStorage.getItem('vpn_selected_apps');
     let parsedApps = selectedApps;
     if (storedApps) {
-        try { 
-            parsedApps = JSON.parse(storedApps);
-            setSelectedApps(parsedApps); 
+        try {
+            // Мерджим поверх дефолтов, а не заменяем: иначе сервисы, добавленные в новой
+            // версии (Antigravity), отсутствуют в сохранённом объекте как ключи.
+            parsedApps = { ...selectedApps, ...JSON.parse(storedApps) };
+            setSelectedApps(parsedApps);
         } catch (e) {}
     }
     
