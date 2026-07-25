@@ -16,3 +16,8 @@ logs
 .claude
 tsconfig.node.tsbuildinfo
 vite.config.ts.timestamp*
+
+# Ядро VPN и бинарники движка — не публикуются
+electron/main.ts
+electron/vpnConfig.ts
+bin
