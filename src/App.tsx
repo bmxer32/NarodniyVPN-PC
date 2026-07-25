@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 
 // НЕ ЗАБУДЬТЕ ОБНОВИТЬ ВЕРСИЮ В package.json ТОЖЕ
-const CURRENT_VERSION = "1.2.6";
+const CURRENT_VERSION = "1.2.7";
 
 // --- ИКОНКИ ---
 const TikTokIcon = ({ className }: { className?: string }) => (
