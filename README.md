@@ -4,9 +4,9 @@
 
 **Windows-приложение для VPN с раздельной маршрутизацией трафика, построенное на Electron + React**
 
-[![Скачать](https://img.shields.io/badge/⬇️_Скачать-v1.2.8-brightgreen?style=for-the-badge)](https://github.com/bmxer32/NarodniyVPN-PC/releases/tag/v1.2.8)
+[![Скачать](https://img.shields.io/badge/⬇️_Скачать-v1.2.11-brightgreen?style=for-the-badge)](https://github.com/bmxer32/NarodniyVPN-PC/releases/tag/v1.2.11)
 
-![Version](https://img.shields.io/badge/версия-1.2.8-blue)
+![Version](https://img.shields.io/badge/версия-1.2.11-blue)
 ![Platform](https://img.shields.io/badge/платформа-Windows-lightgrey)
 ![Electron](https://img.shields.io/badge/Electron-30-47848F?logo=electron)
 ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react)
