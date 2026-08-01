@@ -21,3 +21,7 @@ vite.config.ts.timestamp*
 electron/main.ts
 electron/vpnConfig.ts
 bin
+_bin-backup
+stress-tun2socks.ps1
+swap-debug-tun2socks.ps1
+collect-dumps.ps1

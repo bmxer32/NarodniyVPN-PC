@@ -1,7 +1,7 @@
 {
   "name": "narodniy-vpn",
   "private": true,
-  "version": "1.2.8",
+  "version": "1.2.11",
   "description": "Народный VPN - Свободный доступ к интернету", 
   "author": "Narodniy VPN Team",
   "type": "module",
